@@ -1,8 +1,10 @@
 import { useSnapshot } from "valtio";
+import { useState, useEffect, Suspense } from "react";
 
 import { Snap, GalleryConfig } from "./types";
 
 import ImagesGallery from "./components/Gallery";
+import Loader from "./components/Loader";
 import {
   portalMain,
   portalArtists,
@@ -29,6 +31,17 @@ import state from "./store";
 
 const App = () => {
   const snap = useSnapshot(state);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+
+    return () => {
+      clearTimeout(delay);
+    };
+  }, []);
 
   const galleryConfigs: { [key: string]: GalleryConfig } = {
     main: {
@@ -104,7 +117,13 @@ const App = () => {
     );
   };
 
-  return <div className={"wrapper"}>{getActiveGallery(snap)}</div>;
+  return (
+    <div className={"wrapper"}>
+      <Suspense fallback={<Loader />}>
+        {loading ? <Loader /> : getActiveGallery(snap)}
+      </Suspense>
+    </div>
+  );
 };
 
 export default App;

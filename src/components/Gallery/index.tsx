@@ -338,7 +338,11 @@ const ImagesGallery: React.FC<ImagesGalleryProps> = ({
   const backgroundImage = textureLoader.load(bg);
 
   return (
-    <Canvas dpr={[1, 1.5]} camera={{ fov: 70, position: [0, 2, 15] }}>
+    <Canvas
+      style={{ background: "#000" }}
+      dpr={[1, 1.5]}
+      camera={{ fov: 70, position: [0, 2, 15] }}
+    >
       <ambientLight intensity={-10.2} />
       <primitive object={backgroundImage} attach="background" />
 
