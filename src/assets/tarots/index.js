@@ -5,6 +5,7 @@ import tarotLovers from "./tarot-lovers.jpg";
 import tarotTemperance from "./tarot-temperance.jpeg";
 import tarotStar from "./tarot-star.jpg";
 import tarotMagician from "./tarot-magician.jpg";
+import tarotFool from "./tarot-fool.jpg";
 
 export {
   tarotDeath,
@@ -14,4 +15,5 @@ export {
   tarotTemperance,
   tarotStar,
   tarotMagician,
+  tarotFool,
 };

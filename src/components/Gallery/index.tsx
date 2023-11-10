@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { useEffect, useRef, useState } from "react";
 import { useMedia } from "react-use";
 import { Canvas, useFrame } from "@react-three/fiber";
+import { useNavigate } from "react-router-dom";
 import { TextureLoader } from "three";
 import {
   useCursor,
@@ -200,6 +201,7 @@ const Frame: React.FC<FrameProps> = ({
             anchorY="top"
             position={[0.55, GOLDENRATIO - 0.06, 0]}
             fontSize={0.04}
+            font="/RobotoMedium.ttf"
           >
             {title}
           </Text>
@@ -248,6 +250,7 @@ const Frames = ({
   );
   const isPhone = useMedia(`screen and  (max-width:640px)`, true);
   const snap = useSnapshot(state);
+  const navigate = useNavigate();
 
   const getCameraDistance = (isActive?: boolean) => {
     if (isActive) {
@@ -293,7 +296,14 @@ const Frames = ({
           if (e.object.userData?.portal) {
             state.activeGallery = e.object.userData?.portal;
           } else {
-            window.open(e.object.userData.url, "_blank");
+            const currentUrl = new URL(window.location.href);
+            const targetUrl = new URL(e.object.userData.url, currentUrl);
+
+            if (currentUrl.origin === targetUrl.origin) {
+              navigate(e.object.userData.url);
+            } else {
+              window.open(e.object.userData.url, "_blank");
+            }
           }
 
           return;

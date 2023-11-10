@@ -6,6 +6,7 @@ import {
   tarotLovers,
   tarotStar,
   tarotMagician,
+  tarotFool,
 } from "../../src/assets/tarots";
 
 const portalMain = [
@@ -71,6 +72,13 @@ const portalMain = [
     title: "don't enter",
     url: "",
     portal: "don't enter",
+  },
+  {
+    position: [8.75, 0, -8.5],
+    rotation: [0, -Math.PI / 8, 0],
+    src: tarotFool,
+    title: "Behind the scenes",
+    url: `/portal/behind-the-scenes`,
   },
 ];
 
